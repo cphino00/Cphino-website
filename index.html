@@ -444,32 +444,27 @@
       </div>
 
       <!-- Visitor Counter (Right Bottom Side) -->
-      <div style="font-weight:600; color:var(--muted);" id="visitorCount">
-        Visitors: loading...
-      </div>
+     <div style="font-size:13px; color:#777;">
+  Visitors:
+  <img 
+    src="https://hitwebcounter.com/counter/counter.php?page=10203040&style=0006&nbdigits=5&type=ip&initCount=0"
+    title="Visitor Counter"
+    alt="Visitor Counter">
+</div>
+
 
   </div>
 </footer>
 
-
   <script>
   document.getElementById('year').innerText = new Date().getFullYear();
   window.addEventListener('load', () => { feather.replace() });
-
-  // Visitor Counter
-  fetch('https://api.countapi.xyz/hit/cphino.com/visits')
-    .then(resp => resp.json())
-    .then(data => {
-      document.getElementById('visitorCount').innerText = "Visitors: " + data.value;
-    })
-    .catch(() => {
-      document.getElementById('visitorCount').innerText = "Visitors: N/A";
-    });
-</script>
+  </script>
 
 
 
 </body>
 </html>
+
 
 
