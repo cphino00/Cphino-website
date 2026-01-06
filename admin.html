@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Admin — Cphino Knowledge Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./css/style.css">
+
+  <style>
+    .admin-box {
+      max-width: 720px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 24px;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      border: 1px solid #e5e7eb;
+    }
+
+    input, textarea {
+      width: 100%;
+      margin-bottom: 12px;
+    }
+
+    .post {
+      border-top: 1px solid #e5e7eb;
+      padding-top: 12px;
+      margin-top: 12px;
+    }
+
+    .post img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 8px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .danger {
+      background: #ef4444;
+    }
+
+    #editor { display: none; }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="brand">
+      <div class="logo">CP</div>
+      <div>
+        <h1 style="font-size:14px;margin:0">Cphino</h1>
+        <div class="muted" style="font-size:12px">Knowledge Hub Admin</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- LOGIN -->
+  <div class="admin-box" id="loginBox">
+    <h2>Admin Login</h2>
+    <input type="email" id="email" placeholder="Admin Email">
+    <input type="password" id="password" placeholder="Password">
+    <button class="btn" id="loginBtn">Login</button>
+  </div>
+
+  <!-- EDITOR -->
+  <div class="admin-box" id="editor">
+    <h2>Create / Edit Post</h2>
+
+    <input type="hidden" id="postId">
+    <input type="text" id="title" placeholder="Post Title">
+    <textarea id="content" rows="6" placeholder="Post content"></textarea>
+    <input type="file" id="image">
+
+    <button class="btn" id="publishBtn">Publish</button>
+    <button class="btn danger" id="logoutBtn">Logout</button>
+
+    <h3 style="margin-top:24px">Existing Posts</h3>
+    <div id="posts"></div>
+  </div>
+
+</main>
+
+<footer class="container">
+  <span class="muted">© <span id="year"></span> Cphino</span>
+</footer>
+
+<!-- Link external admin.js -->
+<script type="module" src="./js/admin.js"></script>
+
+</body>
+</html>
