@@ -32,6 +32,6 @@ async function loadPosts() {
     postsContainer.appendChild(div);
   });
 }
-
 loadPosts();
+
 
