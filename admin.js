@@ -1,3 +1,5 @@
+import { auth, db } from "./firebase.js";
+
 import {
   signInWithEmailAndPassword,
   signOut,
@@ -8,41 +10,40 @@ import {
   collection,
   addDoc,
   getDocs,
-  updateDoc,
   deleteDoc,
   doc,
-  orderBy,
-  query
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-import { auth, db } from "./firebase.js";
-
-
-/* DOM */
+// DOM
 const loginBox = document.getElementById("loginBox");
 const editor = document.getElementById("editor");
+
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
 const loginBtn = document.getElementById("loginBtn");
 const logoutBtn = document.getElementById("logoutBtn");
+
+const titleInput = document.getElementById("title");
+const contentInput = document.getElementById("content");
 const publishBtn = document.getElementById("publishBtn");
 const postsDiv = document.getElementById("posts");
 
-/* LOGIN */
-loginBtn?.addEventListener("click", async () => {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-
+// LOGIN
+loginBtn.addEventListener("click", async () => {
   try {
-    await signInWithEmailAndPassword(auth, email, password);
-  } catch (e) {
-    alert(e.message);
+    await signInWithEmailAndPassword(
+      auth,
+      emailInput.value,
+      passwordInput.value
+    );
+  } catch (err) {
+    alert(err.message);
   }
 });
 
-/* LOGOUT */
-logoutBtn?.addEventListener("click", () => signOut(auth));
-
-/* AUTH STATE */
-onAuthStateChanged(auth, user => {
+// AUTH STATE
+onAuthStateChanged(auth, (user) => {
   if (user) {
     loginBox.style.display = "none";
     editor.style.display = "block";
@@ -53,70 +54,53 @@ onAuthStateChanged(auth, user => {
   }
 });
 
-/* CREATE / UPDATE */
-publishBtn?.addEventListener("click", async () => {
-  const title = document.getElementById("title").value;
-  const content = document.getElementById("content").value;
-  const postId = document.getElementById("postId").value;
+// LOGOUT
+logoutBtn.addEventListener("click", async () => {
+  await signOut(auth);
+});
 
-  if (!title || !content) return alert("Fill all fields");
-
-  if (postId) {
-    await updateDoc(doc(db, "posts", postId), { title, content });
-  } else {
-    await addDoc(collection(db, "posts"), {
-      title,
-      content,
-      createdAt: new Date()
-    });
+// PUBLISH
+publishBtn.addEventListener("click", async () => {
+  if (!titleInput.value || !contentInput.value) {
+    alert("Title & content required");
+    return;
   }
 
-  clearForm();
+  await addDoc(collection(db, "Posts"), {
+    title: titleInput.value,
+    content: contentInput.value,
+    createdAt: serverTimestamp()
+  });
+
+  titleInput.value = "";
+  contentInput.value = "";
   loadPosts();
 });
 
-/* LOAD POSTS */
+// LOAD POSTS
 async function loadPosts() {
   postsDiv.innerHTML = "";
-  const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
-  const snap = await getDocs(q);
 
-  snap.forEach(d => {
+  const snap = await getDocs(collection(db, "Posts"));
+  snap.forEach((d) => {
     const data = d.data();
-    const div = document.createElement("div");
-    div.className = "post";
-    div.innerHTML = `
-      <h4>${data.title}</h4>
-      <p>${data.content}</p>
-      <div class="actions">
-        <button class="btn edit">Edit</button>
-        <button class="btn danger delete">Delete</button>
+
+    postsDiv.innerHTML += `
+      <div class="post">
+        <h4>${data.title}</h4>
+        <p>${data.content}</p>
+        <div class="actions">
+          <button class="btn danger" data-id="${d.id}">Delete</button>
+        </div>
       </div>
     `;
-    div.querySelector(".edit").onclick = () => editPost(d.id, data);
-    div.querySelector(".delete").onclick = () => deletePost(d.id);
-    postsDiv.appendChild(div);
+  });
+
+  document.querySelectorAll(".danger").forEach(btn => {
+    btn.onclick = async () => {
+      await deleteDoc(doc(db, "Posts", btn.dataset.id));
+      loadPosts();
+    };
   });
 }
 
-/* EDIT */
-function editPost(id, data) {
-  document.getElementById("postId").value = id;
-  document.getElementById("title").value = data.title;
-  document.getElementById("content").value = data.content;
-}
-
-/* DELETE */
-async function deletePost(id) {
-  if (confirm("Delete this post?")) {
-    await deleteDoc(doc(db, "posts", id));
-    loadPosts();
-  }
-}
-
-/* RESET */
-function clearForm() {
-  document.getElementById("postId").value = "";
-  document.getElementById("title").value = "";
-  document.getElementById("content").value = "";
-}
