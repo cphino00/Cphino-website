@@ -17,7 +17,7 @@ import {
 
 // DOM
 const loginBox = document.getElementById("loginBox");
-const editor = document.getElementById("editor");
+const editor = document.getElementById("editorSection");
 
 const emailInput = document.getElementById("adminEmail");
 const passwordInput = document.getElementById("adminPassword");
@@ -103,5 +103,6 @@ async function loadPosts() {
     };
   });
 }
+
 
 
