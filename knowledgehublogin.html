@@ -52,18 +52,18 @@
   <!-- LOGIN -->
   <div class="admin-box" id="loginBox">
     <h2>Admin Login</h2>
-    <input type="email" id="email" placeholder="Admin Email">
-    <input type="password" id="password" placeholder="Password">
+    <input type="email" id="adminEmail" placeholder="Admin Email">
+    <input type="password" id="adminPassword" placeholder="Password">
     <button class="btn" id="loginBtn">Login</button>
   </div>
 
   <!-- EDITOR -->
-  <div class="admin-box" id="editor">
+  <div class="admin-box" id="editorSection">
     <h2>Create / Edit Post</h2>
 
     <input type="hidden" id="postId">
-    <input type="text" id="title" placeholder="Post Title">
-    <textarea id="content" rows="6" placeholder="Post content"></textarea>
+    <input type="text" id="postTitle" placeholder="Post title">
+    <textarea id="postContent" rows="6" placeholder="Content"></textarea>
 
     <button class="btn" id="publishBtn">Publish</button>
     <button class="btn danger" id="logoutBtn">Logout</button>
@@ -74,8 +74,10 @@
 
 </main>
 
-<script type="module" src="/admin.js"></script>
+<script type="module" src="./Firebase.js"></script> 
+<script type="module" src="./admin.js"></script>
 
 </body>
 </html>
+
 
