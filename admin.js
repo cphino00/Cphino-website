@@ -19,13 +19,13 @@ import {
 const loginBox = document.getElementById("loginBox");
 const editor = document.getElementById("editor");
 
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
+const emailInput = document.getElementById("adminEmail");
+const passwordInput = document.getElementById("adminPassword");
 const loginBtn = document.getElementById("loginBtn");
 const logoutBtn = document.getElementById("logoutBtn");
 
-const titleInput = document.getElementById("title");
-const contentInput = document.getElementById("content");
+const titleInput = document.getElementById("postTitle");
+const contentInput = document.getElementById("postContent");
 const publishBtn = document.getElementById("publishBtn");
 const postsDiv = document.getElementById("posts");
 
@@ -103,4 +103,5 @@ async function loadPosts() {
     };
   });
 }
+
 
