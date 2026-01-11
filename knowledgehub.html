@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Knowledge Hub — Cphino</title>
+  <meta name="description" content="Knowledge Hub for Cphino — AI insights, blogs, and updates.">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="brand">
+      <div class="logo">CP</div>
+      <div>
+        <h1 style="font-size:14px;margin:0">Cphino</h1>
+        <div class="muted" style="font-size:12px">
+          Process optimization for chemical & industrial manufacturing
+        </div>
+      </div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="usecases.html">Use Cases</a></li>
+        <li><a href="cphinoai.html">CphinoAI</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="how.html">How it Works</a></li>
+        <li><a href="knowledgehub.html" style="color:#000;font-weight:700">Knowledge Hub</a></li>
+        <li><a href="contact.html" class="cta-btn">Get Started</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <h2>Knowledge Hub</h2>
+
+  <!-- Admin Login (hidden for normal users) -->
+<div id="adminLogin" style="display:none;">
+  <h3>Admin Login</h3>
+  <input type="email" id="adminEmail" placeholder="Admin Email">
+  <input type="password" id="adminPass" placeholder="Password">
+  <button id="loginBtn">Login</button>
+  <p id="loginMsg" class="muted"></p>
+</div>
+
+<!-- Admin Post Form -->
+<div id="postForm" style="display:none;">
+  <h3>Create New Post</h3>
+  <input type="text" id="postTitle" placeholder="Post Title">
+  <textarea id="postContent" placeholder="Post Content"></textarea>
+  <button id="submitPost">Publish</button>
+</div>
+
+
+  <!-- Visitor Post Section -->
+  <div id="postsContainer">
+    <h3>All Posts</h3>
+    <div id="postsList"></div>
+  </div>
+
+  <div id="postsContainer"></div>
+</main>
+
+<footer class="container">
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap">
+    <div>
+      <strong>Cphino</strong><br>
+      <span class="muted">© <span id="year"></span> Cphino</span>
+    </div>
+    <div id="visitorCount" class="muted">Visitors: loading...</div>
+  </div>
+</footer>
+
+<script type ="module" src="/js/fetchPosts.js"></script>
+<script type="module" src="./js/knowledgehub.js"></script>
+<script src="./js/main.js"></script>
+</body>
+</html>
