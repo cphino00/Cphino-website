@@ -1,8 +1,8 @@
 import { auth, db } from "./firebase.js";
-import {
+/* import {
   signInWithEmailAndPassword,
   onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";*/
 
 import {
   collection,
@@ -100,4 +100,5 @@ await addDoc(collection(db, "posts"), {
   createdAt: new Date(),
   author: auth.currentUser.email
 });
+
 
