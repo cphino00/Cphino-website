@@ -16,22 +16,21 @@ async function loadPosts() {
 
   const snapshot = await getDocs(q);
 
-  postsContainer.innerHTML = "";
+  if(snapshot.empty){
+    postsContainer.innerHTML ="<p>No posts yet.</p>;
+      return;
+  }
 
   snapshot.forEach((doc) => {
     const data = doc.data();
 
-    const div = document.createElement("div");
-    div.className = "post-card";
-
-    div.innerHTML = `
-      <h3>${data.title}</h3>
-      <p>${data.content}</p>
+    postsContainer.innerHTML +=`<div class="post-card">
+    <h3>${data.title}</h3>
+    <p>${data.content}</p>
+    </div>
     `;
-
-    postsContainer.appendChild(div);
   });
-}
 loadPosts();
+
 
 
