@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Knowledge Hub</title>
+</head>
+<body>
+
+<h1>Knowledge Hub</h1>
+<div id="posts"></div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+  import { getFirestore, collection, getDocs, query, orderBy }
+    from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDlnHswacdCS03as6OXsdkrvAVNBMk1uv4",
+    authDomain: "cphino-knowledgehub.firebaseapp.com",
+    projectId: "cphino-knowledgehub",
+    storageBucket: "cphino-knowledgehub.firebasestorage.app",
+    messagingSenderId: "1047808575898",
+    appId: "1:1047808575898:web:dcb42a93d286303d35d223"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+  const snapshot = await getDocs(q);
+
+  snapshot.forEach(doc => {
+    posts.innerHTML += `
+      <h3>${doc.data().title}</h3>
+      <p>${doc.data().content}</p>
+      <hr>
+    `;
+  });
+</script>
+
+</body>
+</html>
