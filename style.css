@@ -725,6 +725,64 @@ main.container li {
     margin: 0 auto;
     color: #64748b;
    }
+
+/* Knowledge Hub Page Styling */
+body {
+  font-family: "Inter", "Poppins", Arial, sans-serif;
+  background-color: #f8f9fb;
+  color: #222;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main container */
+#posts {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+/* Page heading */
+h1 {
+  text-align: center;
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 50px;
+  color: #0a2540;
+}
+
+/* Each post card */
+.post {
+  background: #ffffff;
+  padding: 30px 35px;
+  margin-bottom: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* Post title */
+.post h3 {
+  font-size: 26px;
+  margin-bottom: 15px;
+  color: #111827;
+}
+
+/* Post content */
+.post p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #374151;
+  white-space: pre-line; /* keeps line breaks */
+}
+
+/* Divider */
+.post hr {
+  border: none;
+  height: 1px;
+  background: #e5e7eb;
+  margin-top: 30px;
+}
+
  /* CTA */ 
      .big-cta{ 
          display:flex;
@@ -811,4 +869,5 @@ main.container li {
          font-weight:700;
          border:none;
          cursor:pointer }
+
  
