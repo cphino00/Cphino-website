@@ -18,7 +18,7 @@ import {
 /* ======================
    CONFIG
 ====================== */
-const ADMIN_EMAIL = "Sumitsagar065@gmail.com"; // 🔒 only this admin
+const ADMIN_EMAIL = "sumitsagar065@gmail.com"; // 🔒 only this admin
 
 /* ======================
    DOM
@@ -124,5 +124,6 @@ async function loadPosts() {
     };
   });
 }
+
 
 
