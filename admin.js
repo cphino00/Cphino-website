@@ -15,7 +15,14 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-// DOM
+/* ======================
+   CONFIG
+====================== */
+const ADMIN_EMAIL = "Sumitsagar065@gmail.com"; // 🔒 only this admin
+
+/* ======================
+   DOM
+====================== */
 const loginBox = document.getElementById("loginBox");
 const editor = document.getElementById("editorSection");
 
@@ -29,22 +36,31 @@ const contentInput = document.getElementById("postContent");
 const publishBtn = document.getElementById("publishBtn");
 const postsDiv = document.getElementById("posts");
 
-// LOGIN
+/* ======================
+   LOGIN
+====================== */
 loginBtn.addEventListener("click", async () => {
   try {
-    await signInWithEmailAndPassword(
+    const res = await signInWithEmailAndPassword(
       auth,
       emailInput.value,
       passwordInput.value
     );
+
+    if (res.user.email !== ADMIN_EMAIL) {
+      alert("Not authorized");
+      await signOut(auth);
+    }
   } catch (err) {
     alert(err.message);
   }
 });
 
-// AUTH STATE
+/* ======================
+   AUTH STATE
+====================== */
 onAuthStateChanged(auth, (user) => {
-  if (user) {
+  if (user && user.email === ADMIN_EMAIL) {
     loginBox.style.display = "none";
     editor.style.display = "block";
     loadPosts();
@@ -54,12 +70,16 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-// LOGOUT
+/* ======================
+   LOGOUT
+====================== */
 logoutBtn.addEventListener("click", async () => {
   await signOut(auth);
 });
 
-// PUBLISH
+/* ======================
+   PUBLISH POST
+====================== */
 publishBtn.addEventListener("click", async () => {
   if (!titleInput.value || !contentInput.value) {
     alert("Title & content required");
@@ -77,11 +97,14 @@ publishBtn.addEventListener("click", async () => {
   loadPosts();
 });
 
-// LOAD POSTS
+/* ======================
+   LOAD + DELETE POSTS
+====================== */
 async function loadPosts() {
   postsDiv.innerHTML = "";
 
   const snap = await getDocs(collection(db, "Posts"));
+
   snap.forEach((d) => {
     const data = d.data();
 
@@ -89,9 +112,7 @@ async function loadPosts() {
       <div class="post">
         <h4>${data.title}</h4>
         <p>${data.content}</p>
-        <div class="actions">
-          <button class="btn danger" data-id="${d.id}">Delete</button>
-        </div>
+        <button class="btn danger" data-id="${d.id}">Delete</button>
       </div>
     `;
   });
@@ -103,6 +124,4 @@ async function loadPosts() {
     };
   });
 }
-
-
 
