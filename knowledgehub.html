@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Knowledge Hub</title>
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
@@ -30,6 +31,7 @@
 
   snapshot.forEach(doc => {
     posts.innerHTML += `
+    <div class="post">
       <h3>${doc.data().title}</h3>
       <p>${doc.data().content}</p>
       <hr>
@@ -39,3 +41,4 @@
 
 </body>
 </html>
+
